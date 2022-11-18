@@ -1,4 +1,5 @@
 import { IronSessionOptions } from "iron-session";
+import { ScheduleSession } from "../types/ScheduleSession";
 
 export const sessionOptions: IronSessionOptions = {
     password: String(process.env.SECRET_COOKIE_PASSWORD),
@@ -11,6 +12,7 @@ export const sessionOptions: IronSessionOptions = {
 
 declare module 'iron-session' {
     interface IronSessionData {
-        token: string
+        token: string;
+        schedule: ScheduleSession;
     }
 }// descobri o por que disso

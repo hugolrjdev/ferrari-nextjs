@@ -1,5 +1,6 @@
 import axios from "axios";
 import { get } from "lodash";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Alert from "../../../components/Alert";
@@ -11,16 +12,18 @@ type FormData = {
 }
 
 const FormLogin = () => {
+
+  const router = useRouter();
+
   const {register, handleSubmit, formState: {errors}, setError, clearErrors, watch} = useForm<FormData>();
 
   const email = watch('email');
   const password = watch('password');
 
   const enviar = (data: FormData) => {
-    axios.post(`/auth/login`, data, {
-      baseURL: process.env.API_URL,
-    }).then(({data})=>{
-      console.log(data)
+    axios.post(`api/auth/login`, data).then(({data})=>{
+      // console.log(data)
+      router.push('/');
     }).catch((err: any)=>setError('server', {
       message: err.response.data.message ?? err.message ?? 'Error Desconhecido'
     }));

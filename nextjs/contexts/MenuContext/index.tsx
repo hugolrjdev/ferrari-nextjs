@@ -26,7 +26,7 @@ export const MenuProvider = ({children}: MenuProviderType) => {
         }
     }, [isOpen]); // se o array ficar vazio o useEffect funcionara somente quando o Componente Header for montados
 
-    return<MenuContext.Provider value={{isOpen, setIsOpen}}>{children}</MenuContext.Provider>//se você não passar um objeto ele não funcionará
+    return <MenuContext.Provider value={{isOpen, setIsOpen}}>{children}</MenuContext.Provider>//se você não passar um objeto ele não funcionará
 
 }
 

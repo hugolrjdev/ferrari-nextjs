@@ -12,12 +12,11 @@ type ComponentPageType = {
   token: string
 }
 
-const Home: NextPage<ComponentPageType> = ({token}) => {
+const Home: NextPage<ComponentPageType> = () => {
   return (
     <Fragment>
       <Header />
       <Banner />
-      {token}
       <Contact />
       <Service />
       <Footer />
@@ -28,11 +27,12 @@ const Home: NextPage<ComponentPageType> = ({token}) => {
 export default Home
 
 export const getServerSideProps = withIronSessionSsr(async (context: GetServerSidePropsContext) => {
-  context.req.session.token = 'D3UR0cK'; //passando um token para o nosso cokie
+  console.log('token:', context.req.session.token )
+  // context.req.session.token = 'D3UR0cK'; //passando um token para o nosso cokie
   await context.req.session.save(); // gravando token no nosso cokie
   return {
     props: {
-      token: context.req.session.token,
+      token: context.req.session.token? context.req.session.token: null,
     }
   }
-}, sessionOptions)
+}, sessionOptions);
